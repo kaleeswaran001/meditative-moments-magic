@@ -39,14 +39,12 @@ export const MeditationTimer = ({ duration, onDurationChange }: MeditationTimerP
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins.toString().padStart(2, "0")}:${secs
-      .toString()
-      .padStart(2, "0")}`;
+    return `${mins.toString().padStart(2, "0")}:${secs.toString().padStart(2, "0")}`;
   };
 
   return (
-    <div className="space-y-6">
-      <h2 className="heading-2">Meditation Timer</h2>
+    <div className="flex flex-col items-center space-y-8">
+      <h2 className="heading-2 text-center">Meditation Timer</h2>
       
       <div className="meditation-circle">
         <span className="text-4xl font-light">{formatTime(timeLeft)}</span>
@@ -71,8 +69,8 @@ export const MeditationTimer = ({ duration, onDurationChange }: MeditationTimerP
         </Button>
       </div>
 
-      <div className="space-y-2">
-        <label className="text-sm text-muted-foreground">
+      <div className="w-full max-w-sm space-y-2">
+        <label className="text-sm text-muted-foreground text-center block">
           Duration: {duration} minutes
         </label>
         <Slider
