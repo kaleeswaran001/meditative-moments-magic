@@ -9,41 +9,134 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      data: {
+      meditation_goals: {
         Row: {
-          avg_minutes: number | null
-          created_at: string
-          email: string | null
-          id: number
-          pswd: string | null
-          streak: number | null
-          t_minutes: number | null
-          t_session: number | null
-          u_name: string | null
+          completed: boolean | null
+          completed_at: string | null
+          created_at: string | null
+          id: string
+          title: string
+          user_id: string | null
         }
         Insert: {
-          avg_minutes?: number | null
-          created_at?: string
-          email?: string | null
-          id?: number
-          pswd?: string | null
-          streak?: number | null
-          t_minutes?: number | null
-          t_session?: number | null
-          u_name?: string | null
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          title: string
+          user_id?: string | null
         }
         Update: {
-          avg_minutes?: number | null
-          created_at?: string
-          email?: string | null
-          id?: number
-          pswd?: string | null
+          completed?: boolean | null
+          completed_at?: string | null
+          created_at?: string | null
+          id?: string
+          title?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "meditation_goals_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      meditation_sessions: {
+        Row: {
+          completed_at: string | null
+          duration: number
+          frequency: string | null
+          id: string
+          user_id: string | null
+        }
+        Insert: {
+          completed_at?: string | null
+          duration: number
+          frequency?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Update: {
+          completed_at?: string | null
+          duration?: number
+          frequency?: string | null
+          id?: string
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "meditation_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      profiles: {
+        Row: {
+          created_at: string | null
+          id: string
+          streak: number | null
+          total_minutes: number | null
+          total_sessions: number | null
+          username: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          id: string
           streak?: number | null
-          t_minutes?: number | null
-          t_session?: number | null
-          u_name?: string | null
+          total_minutes?: number | null
+          total_sessions?: number | null
+          username?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string
+          streak?: number | null
+          total_minutes?: number | null
+          total_sessions?: number | null
+          username?: string | null
         }
         Relationships: []
+      }
+      user_settings: {
+        Row: {
+          created_at: string | null
+          dark_mode: boolean | null
+          notification_sounds: boolean | null
+          updated_at: string | null
+          user_id: string
+          volume: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          dark_mode?: boolean | null
+          notification_sounds?: boolean | null
+          updated_at?: string | null
+          user_id: string
+          volume?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          dark_mode?: boolean | null
+          notification_sounds?: boolean | null
+          updated_at?: string | null
+          user_id?: string
+          volume?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_settings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: true
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
